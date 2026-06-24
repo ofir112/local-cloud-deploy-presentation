@@ -97,12 +97,13 @@
     align-items: center;
     padding: 60px 80px 100px;
     opacity: 0;
-    transition: opacity 0.5s ease;
+    transform: scale(0.97);
+    transition: opacity 0.6s ease, transform 0.6s ease;
     pointer-events: none;
     overflow-y: auto;
     overflow-x: hidden;
   }
-  .slide.active { opacity: 1; pointer-events: all; }
+  .slide.active { opacity: 1; transform: scale(1); pointer-events: all; }
 
   .slide-inner { max-width: 1100px; width: 100%; }
 
@@ -125,6 +126,17 @@
     line-height: 1.6;
   }
   .accent-text { color: var(--accent); }
+  h1 .accent-text, h2 .accent-text {
+    background: linear-gradient(90deg, var(--accent-dim), var(--accent-glow), var(--accent), var(--accent-glow), var(--accent-dim));
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .slide.active h1 .accent-text,
+  .slide.active h2 .accent-text {
+    animation: shimmer 4s linear infinite;
+  }
 
   /* ── Cards ── */
   .cards { display: grid; gap: 16px; }
@@ -142,12 +154,26 @@
   .card:hover {
     border-color: var(--accent);
     box-shadow: 0 8px 30px rgba(201, 168, 76, 0.1);
+    transform: translateY(-4px);
   }
+  .slide.active .card {
+    animation: borderGlow 3s ease-in-out infinite;
+  }
+  .slide.active .card:nth-child(2) { animation-delay: 0.5s; }
+  .slide.active .card:nth-child(3) { animation-delay: 1s; }
+  .slide.active .card:nth-child(4) { animation-delay: 1.5s; }
+  .slide.active .card:nth-child(5) { animation-delay: 2s; }
+  .slide.active .card:nth-child(6) { animation-delay: 2.5s; }
   .card-icon {
     font-size: 2rem;
     margin-bottom: 12px;
     display: block;
   }
+  .slide.active .card-icon {
+    animation: iconFloat 3s ease-in-out infinite;
+  }
+  .slide.active .card:nth-child(2) .card-icon { animation-delay: 0.3s; }
+  .slide.active .card:nth-child(3) .card-icon { animation-delay: 0.6s; }
   .card h3 {
     font-size: 1.15rem;
     font-weight: 700;
@@ -177,7 +203,14 @@
     border-right: 4px solid var(--accent);
     transition: all 0.3s ease;
   }
-  .feature-row:hover { background: var(--bg-card-alt); }
+  .feature-row:hover { background: var(--bg-card-alt); transform: translateX(-6px); }
+  .slide.active .feature-row { animation: fadeSlideUp 0.5s ease both; }
+  .slide.active .feature-row:nth-child(1) { animation-delay: 0.2s; }
+  .slide.active .feature-row:nth-child(2) { animation-delay: 0.35s; }
+  .slide.active .feature-row:nth-child(3) { animation-delay: 0.5s; }
+  .slide.active .feature-row:nth-child(4) { animation-delay: 0.65s; }
+  .slide.active .feature-row:nth-child(5) { animation-delay: 0.8s; }
+  .slide.active .feature-row:nth-child(6) { animation-delay: 0.95s; }
   .feature-icon {
     font-size: 1.6rem;
     flex-shrink: 0;
@@ -203,6 +236,9 @@
     margin-top: 32px;
     position: relative;
     overflow: hidden;
+  }
+  .slide.active .analogy-box {
+    animation: scaleIn 0.6s ease both 0.3s, pulseGold 4s ease-in-out infinite 1s;
   }
   .analogy-box::before {
     content: '';
@@ -255,11 +291,24 @@
   .diagram-box:hover {
     border-color: var(--accent);
     box-shadow: 0 0 20px rgba(201, 168, 76, 0.1);
+    transform: translateY(-4px);
   }
+  .slide.active .diagram-box {
+    animation: scaleIn 0.5s ease both;
+  }
+  .slide.active .diagram-box:nth-child(1) { animation-delay: 0.2s; }
+  .slide.active .diagram-box:nth-child(3) { animation-delay: 0.5s; }
+  .slide.active .diagram-box:nth-child(5) { animation-delay: 0.8s; }
   .diagram-box .icon { font-size: 2.2rem; margin-bottom: 10px; }
+  .slide.active .diagram-box .icon {
+    animation: iconFloat 3s ease-in-out infinite;
+  }
   .diagram-box .label { font-size: 0.95rem; color: var(--text-muted); }
   .diagram-box .label strong { color: var(--accent); }
   .diagram-arrow { font-size: 1.8rem; color: var(--accent); }
+  .slide.active .diagram-arrow {
+    animation: pulseGold 2s ease-in-out infinite;
+  }
 
   /* ── Vertical flow ── */
   .flow {
@@ -290,6 +339,21 @@
     font-size: 1.4rem;
     padding: 4px 0;
   }
+  .slide.active .flow-arrow {
+    animation: bounceArrow 1.5s ease-in-out infinite;
+  }
+  .slide.active .flow-step {
+    animation: fadeSlideUp 0.4s ease both;
+  }
+  .slide.active .flow-step:nth-child(1) { animation-delay: 0.1s; }
+  .slide.active .flow .flow-arrow:nth-of-type(1) { animation-delay: 0.2s; }
+  .slide.active .flow-step:nth-child(3) { animation-delay: 0.3s; }
+  .slide.active .flow .flow-arrow:nth-of-type(2) { animation-delay: 0.4s; }
+  .slide.active .flow-step:nth-child(5) { animation-delay: 0.5s; }
+  .slide.active .flow .flow-arrow:nth-of-type(3) { animation-delay: 0.6s; }
+  .slide.active .flow-step:nth-child(7) { animation-delay: 0.7s; }
+  .slide.active .flow .flow-arrow:nth-of-type(4) { animation-delay: 0.8s; }
+  .slide.active .flow-step:nth-child(9) { animation-delay: 0.9s; }
 
   /* ── Claude section ── */
   .claude-card {
@@ -306,6 +370,9 @@
     color: var(--text-muted);
   }
   .claude-card strong { color: var(--text); }
+  .slide.active .claude-card {
+    animation: fadeSlideUp 0.6s ease both 0.5s;
+  }
 
   /* ── Prompt box ── */
   .prompt-list {
@@ -329,10 +396,20 @@
   .prompt-box:hover {
     border-color: var(--accent);
     background: var(--bg-card-alt);
+    transform: translateX(-6px);
   }
   .prompt-box::before {
     content: '💬 ';
   }
+  .slide.active .prompt-box {
+    animation: fadeSlideUp 0.4s ease both;
+  }
+  .slide.active .prompt-box:nth-child(1) { animation-delay: 0.15s; }
+  .slide.active .prompt-box:nth-child(2) { animation-delay: 0.3s; }
+  .slide.active .prompt-box:nth-child(3) { animation-delay: 0.45s; }
+  .slide.active .prompt-box:nth-child(4) { animation-delay: 0.6s; }
+  .slide.active .prompt-box:nth-child(5) { animation-delay: 0.75s; }
+  .slide.active .prompt-box:nth-child(6) { animation-delay: 0.9s; }
 
   /* ── Compare table ── */
   .compare-grid {
@@ -347,6 +424,8 @@
     padding: 28px;
     border: 1px solid rgba(201, 168, 76, 0.1);
   }
+  .slide.active .compare-col:nth-child(1) { animation: fadeSlideUp 0.5s ease both 0.2s; }
+  .slide.active .compare-col:nth-child(2) { animation: fadeSlideUp 0.5s ease both 0.4s; }
   .compare-col h3 {
     font-size: 1.2rem;
     font-weight: 700;
@@ -391,6 +470,9 @@
     font-weight: 800;
     line-height: 1.5;
   }
+  .slide.active .bottom-card {
+    animation: scaleIn 0.6s ease both 0.3s, pulseGold 4s ease-in-out infinite 1s;
+  }
 
   /* ── Shared ── */
   .slide-footer {
@@ -414,8 +496,12 @@
     content: '';
     position: absolute;
     top: 0; right: 0;
-    width: 5px; height: 100%;
+    width: 5px; height: 0%;
     background: linear-gradient(180deg, var(--accent-glow), var(--accent-dim), transparent);
+    transition: height 0.8s ease;
+  }
+  .slide.active::after {
+    height: 100%;
   }
   .glow {
     position: absolute;
@@ -426,6 +512,50 @@
   }
   .glow-1 { width: 400px; height: 400px; background: var(--accent-dim); top: -100px; right: -100px; }
   .glow-2 { width: 300px; height: 300px; background: var(--accent); bottom: -80px; left: -80px; }
+  .slide.active .glow-1 {
+    animation: floatGlow1 8s ease-in-out infinite;
+  }
+  .slide.active .glow-2 {
+    animation: floatGlow2 10s ease-in-out infinite;
+  }
+
+  /* ── Animations ── */
+  @keyframes floatGlow1 {
+    0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.12; }
+    50% { transform: translate(-40px, 30px) scale(1.15); opacity: 0.18; }
+  }
+  @keyframes floatGlow2 {
+    0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.12; }
+    50% { transform: translate(30px, -25px) scale(1.1); opacity: 0.16; }
+  }
+  @keyframes shimmer {
+    0% { background-position: -200% center; }
+    100% { background-position: 200% center; }
+  }
+  @keyframes pulseGold {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(201, 168, 76, 0); }
+    50% { box-shadow: 0 0 20px 4px rgba(201, 168, 76, 0.15); }
+  }
+  @keyframes bounceArrow {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(6px); }
+  }
+  @keyframes borderGlow {
+    0%, 100% { border-color: rgba(201, 168, 76, 0.1); }
+    50% { border-color: rgba(201, 168, 76, 0.35); }
+  }
+  @keyframes fadeSlideUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes iconFloat {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-6px); }
+  }
+  @keyframes scaleIn {
+    from { opacity: 0; transform: scale(0.85); }
+    to { opacity: 1; transform: scale(1); }
+  }
 
   .keyboard-hint {
     position: fixed;
@@ -930,8 +1060,38 @@
   <div class="slide-footer">BNA AI</div>
 </div>
 
-<!-- SLIDE 19: Full project path -->
+<!-- SLIDE 19: Security check -->
 <div class="slide" data-slide="17">
+  <div class="glow glow-1"></div>
+  <div class="slide-inner stagger">
+    <h2>בדיקת <span class="accent-text">אבטחה</span> לפני העלאה</h2>
+    <p class="subtitle">לפני שמעלים לאוויר, מומלץ להריץ בדיקת אבטחה. קלוד יחפש פרצות או סיסמאות שנחשפו.</p>
+    <div class="prompt-list">
+      <div class="prompt-box">"Review this project for security issues"</div>
+    </div>
+    <div class="feature-list" style="margin-top: 20px;">
+      <div class="feature-row">
+        <div class="feature-icon">🔑</div>
+        <span class="feature-text">בדיקה שאין <span class="hl">סיסמאות או מפתחות</span> חשופים בקוד</span>
+      </div>
+      <div class="feature-row">
+        <div class="feature-icon">🛡️</div>
+        <span class="feature-text">בדיקה שאין <span class="hl">פרצות אבטחה</span> ידועות</span>
+      </div>
+      <div class="feature-row">
+        <div class="feature-icon">📄</div>
+        <span class="feature-text">וידוא שקובץ <span class="code-inline" style="font-size: 0.85em;">.env</span> לא עולה ל-<span class="hl">GitHub</span></span>
+      </div>
+    </div>
+    <div class="claude-card" style="margin-top: 20px;">
+      <p>💡 <strong>כלל זהב:</strong> מה שעולה לאינטרנט <strong>גלוי לכולם</strong>. תמיד תבדקו לפני שמעלים.</p>
+    </div>
+  </div>
+  <div class="slide-footer">BNA AI</div>
+</div>
+
+<!-- SLIDE 20: Full project path -->
+<div class="slide" data-slide="18">
   <div class="glow glow-1"></div>
   <div class="glow glow-2"></div>
   <div class="slide-inner stagger">
@@ -968,7 +1128,7 @@
 </div>
 
 <!-- SLIDE 20: What to tell Claude -->
-<div class="slide" data-slide="18">
+<div class="slide" data-slide="19">
   <div class="glow glow-2"></div>
   <div class="slide-inner stagger">
     <h2>מה להגיד <span class="accent-text">לקלוד בפועל</span>?</h2>
@@ -986,7 +1146,7 @@
 </div>
 
 <!-- SLIDE 21: What you still need to do -->
-<div class="slide" data-slide="19">
+<div class="slide" data-slide="20">
   <div class="glow glow-1"></div>
   <div class="slide-inner stagger">
     <h2>מה עדיין צריך <span class="accent-text">לעשות בעצמכם</span>?</h2>
@@ -1017,7 +1177,7 @@
 </div>
 
 <!-- SLIDE 22: Summary -->
-<div class="slide" data-slide="20">
+<div class="slide" data-slide="21">
   <div class="glow glow-1"></div>
   <div class="glow glow-2"></div>
   <div class="slide-inner stagger">
@@ -1063,7 +1223,7 @@
 
 <nav class="nav" id="nav">
   <button class="nav-btn" onclick="prev()">&rarr;</button>
-  <span class="nav-counter" id="counter">1 / 21</span>
+  <span class="nav-counter" id="counter">1 / 22</span>
   <div id="dots" style="display: flex; gap: 5px;"></div>
   <span class="nav-counter"></span>
   <button class="nav-btn" onclick="next()">&larr;</button>
